@@ -278,6 +278,28 @@
     (function() {
       var hm = document.createElement("script");
       hm.src = "https://hm.baidu.com/hm.js?d8e7ca091e6a0caa1bf2c3fcabe9b2c6";
+      
+      <!-- 百度统计事件追踪 -->
+      <script>
+      (function() {
+        function trackEvent(category, action, label) {
+          if (typeof _hmt !== "undefined") {
+            _hmt.push(["_trackEvent", category, action, label || ""]);
+          }
+        }
+        document.addEventListener("click", function(e) {
+          var target = e.target.closest("a");
+          if (target) {
+            var href = target.getAttribute("href") || "";
+            if (href.startsWith("tel:")) trackEvent("点击", "拨打电话", href.replace("tel:", ""));
+            if (target.id === "wechatBtn" || href.includes("wechat")) trackEvent("点击", "微信咨询", "悬浮按钮");
+          }
+        });
+        var form = document.getElementById("contactForm");
+        if (form) form.addEventListener("submit", function() { trackEvent("表单", "提交成功", "联系表单"); });
+        window.addEventListener("load", function() { trackEvent("页面", "加载完成", window.location.pathname); });
+      })();
+      </script>
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
     })();
