@@ -3,6 +3,11 @@
  * [P0] 核心 - 2026-03-30
  */
 
+// 生产环境禁用 console 日志
+const isProd = typeof window !== 'undefined' && window.location && window.location.hostname.includes('github.io');
+const log = (...args) => isProd ? null : log(...args);
+const warn = (...args) => isProd ? null : console.warn(...args);
+
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
     initPageLoader();
@@ -105,4 +110,4 @@ function smoothScrollTo(sectionId) {
     }
 }
 
-console.log('✅ 增强功能已加载');
+log('✅ 增强功能已加载');

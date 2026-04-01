@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initScrollReveal();
     }, 500);
     
-    console.log('✅ 最终优化已加载');
+    log('✅ 最终优化已加载');
 });
 
 // 导出工具函数

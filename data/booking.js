@@ -193,7 +193,14 @@ async function submitBooking(event) {
         // 这里可以替换为你的 webhook URL
         // 推荐使用：Web3Forms、Formspree、Beeceptor 等免费服务
         
-        const webhookUrl = 'https://webhook.site/YOUR-WEBHOOK-ID';
+        // Webhook URL - 生产环境请填入真实的 Webhook 地址
+        const webhookUrl = ''; // 如: https://webhook.site/xxxxxx
+        
+        if (!webhookUrl) {
+            console.log('[Booking] Webhook 未配置，跳过提交');
+            alert('预订功能配置中，请直接联系微信：ai_fang365');
+            return;
+        }
         
         // 模拟提交（实际使用时替换为真实 API）
         await new Promise(resolve => setTimeout(resolve, 1000));

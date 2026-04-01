@@ -145,7 +145,7 @@ function initSEO() {
         };
     }
     
-    console.log('✅ SEO 增强已加载');
+    log('✅ SEO 增强已加载');
 }
 
 // 初始化

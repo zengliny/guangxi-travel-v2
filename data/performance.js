@@ -81,10 +81,10 @@ function initPerformanceMonitor() {
             const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
             const firstPaint = timing.firstPaint || 0;
             
-            console.log('📊 性能指标:');
-            console.log(`  DOM加载: ${domReady}ms`);
-            console.log(`  页面加载: ${loadTime}ms`);
-            console.log(`  首屏绘制: ${firstPaint}ms`);
+            log('📊 性能指标:');
+            log(`  DOM加载: ${domReady}ms`);
+            log(`  页面加载: ${loadTime}ms`);
+            log(`  首屏绘制: ${firstPaint}ms`);
             
             // 上报性能数据（可选）
             if (typeof reportPerformance === 'function') {
@@ -107,9 +107,9 @@ function initServiceWorker() {
         // 注意：需要 HTTPS 或 localhost
         if (location.protocol === 'https:' || location.hostname === 'localhost') {
             navigator.serviceWorker.register('/sw.js').then(registration => {
-                console.log('✅ Service Worker 注册成功:', registration.scope);
+                log('✅ Service Worker 注册成功:', registration.scope);
             }).catch(error => {
-                console.log('⚠️ Service Worker 注册失败:', error);
+                log('⚠️ Service Worker 注册失败:', error);
             });
         }
     }
@@ -124,4 +124,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initServiceWorker();
 });
 
-console.log('✅ 性能优化已加载');
+log('✅ 性能优化已加载');

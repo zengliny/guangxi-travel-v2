@@ -152,4 +152,4 @@ CONTENT.localLife = {
     ]
 };
 
-console.log('✅ 内容扩展 v2 已加载');
+log('✅ 内容扩展 v2 已加载');

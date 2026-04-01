@@ -152,4 +152,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initKeyboardShortcuts();
 });
 
-console.log('✅ 交互增强已加载');
+log('✅ 交互增强已加载');
