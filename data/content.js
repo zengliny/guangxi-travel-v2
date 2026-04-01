@@ -547,7 +547,7 @@ CONTENT.trust = {
         {
             id: "trust-8",
             name: "怎么联系我们？",
-            description: "直接加微信ai_fang365，或者打电话CONFIG.phone。北海市区的房子可以先看房再决定要不要托管",
+            description: "直接加微信ai_fang365，或者打电话17200861361。北海市区的房子可以先看房再决定要不要托管",
             tags: ["📞 联系", "💬 微信", "📍 范围"],
             highlight: "联系"
         }

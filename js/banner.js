@@ -141,7 +141,7 @@ function showPropertyDetail(id) {
             </div>
             <div class="property-contact">
                 <button class="btn-wechat" onclick="showWechat()">💬 微信咨询</button>
-                <a href="tel:CONFIG.phone" class="btn-phone">📞 电话预约</a>
+                <a href="tel:17200861361" class="btn-phone">📞 电话预约</a>
             </div>
         </div>
     `;
