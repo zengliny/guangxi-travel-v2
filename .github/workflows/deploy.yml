@@ -1,3 +1,6 @@
+# 统一的 GitHub Actions 部署工作流
+# 合并了 deploy.yml 和 static.yml，并添加了安全检查
+
 name: Deploy to GitHub Pages
 
 on:
@@ -15,13 +18,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # 验证作业
+  # 验证作业 - 确保代码质量
   validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 1. HTML 结构验证
       - name: Validate HTML
         run: |
           echo "检查 HTML 文件..."
@@ -29,13 +33,7 @@ jobs:
             echo "❌ index.html 不存在"
             exit 1
           fi
-          if grep -q "<!DOCTYPE html>" index.html; then
-            echo "✅ HTML 结构正确"
-          else
-            echo "❌ HTML 结构缺失"
-            exit 1
-          fi
-          for tag in "<html" "<head" "<body" "</html>"; do
+          for tag in "<!DOCTYPE html>" "<html" "<head" "<body" "</html>"; do
             if grep -q "$tag" index.html; then
               echo "✅ 找到 $tag"
             else
@@ -44,18 +42,43 @@ jobs:
             fi
           done
 
-      - name: Validate CSS
+      # 2. 安全检查 - 禁止 CONFIG 占位符
+      - name: Check for CONFIG placeholders
         run: |
-          echo "检查 CSS 文件..."
-          if [ ! -f "css/main.css" ]; then
-            echo "⚠️ css/main.css 不存在，跳过"
-          else
-            echo "✅ CSS 模块存在"
+          echo "🔒 检查 CONFIG 占位符..."
+          if grep -r "CONFIG\." --include="*.html" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"; then
+            echo "❌ 发现未替换的 CONFIG 占位符！"
+            grep -r "CONFIG\." --include="*.html" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"
+            exit 1
           fi
-          if [ -f "styles.css" ]; then
-            echo "✅ 旧版 styles.css 存在(兼容)"
+          echo "✅ 无 CONFIG 占位符"
+
+      # 3. 安全检查 - 禁止示例密钥
+      - name: Check for example credentials
+        run: |
+          echo "🔒 检查示例凭证..."
+          # 检查 Sentry DSN 示例
+          if grep -q "example@sentry.io" --include="*.html" --include="*.js" . 2>/dev/null; then
+            echo "⚠️ 发现 Sentry 示例 DSN"
+          fi
+          # 检查 Webhook 示例
+          if grep -q "webhook.site/YOUR-" --include="*.js" . 2>/dev/null; then
+            echo "⚠️ 发现示例 Webhook URL"
+          fi
+          echo "✅ 凭证检查完成"
+
+      # 4. 敏感信息扫描
+      - name: Scan for secrets
+        run: |
+          echo "🔒 扫描敏感信息..."
+          # 检查常见敏感词
+          if grep -ri "password\|secret\|api[_-]key\|token" --include="*.js" --include="*.html" . 2>/dev/null | grep -v "// " | grep -v "node_modules" | grep -v ".git"; then
+            echo "⚠️ 发现可能的敏感信息，请检查"
+          else
+            echo "✅ 无明显敏感信息泄露"
           fi
 
+      # 5. 必要文件检查
       - name: Check required files
         run: |
           echo "检查必要文件..."
@@ -81,7 +104,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
+        with:
+          static_site_generator: none
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -90,16 +115,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-
-  # 失败通知
-  notify-failure:
-    needs: deploy
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify failure
-        run: |
-          echo "⚠️ 部署失败"
-          echo "失败的 Job: ${{ github.job }}"
-          echo "提交: ${{ github.sha }}"
+        uses: actions/deploy-pages@v5

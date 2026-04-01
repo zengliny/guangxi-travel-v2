@@ -46,6 +46,8 @@
     <meta name="apple-mobile-web-app-title" content="广西旅游达人">
     <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Content Security Policy - 安全策略 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://hm.baidu.com https://browser.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://sentry.io;">
     <meta name="format-detection" content="telephone=no">
     
     <!-- AI 友好摘要 -->
@@ -643,7 +645,7 @@
         </div>
     </div>
     
-    <div class="menu-backdrop" onclick="closeMobileMenu()"></div>
+    <div class="menu-backdrop" data-action="closeMobileMenu"></div>
     <!-- 顶部导航 -->
     <header class="header">
         <nav class="nav-container">
@@ -653,7 +655,7 @@
             </ul>
             <div class="header-actions">
                 <a href="tel:17200861361" class="phone-btn" title="电话咨询">📞</a>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+                <button class="mobile-menu-btn" data-action="toggleMobileMenu" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobileMenu">☰</button>
             </div>
         </nav>
     </header>
@@ -720,12 +722,12 @@
                 </div>
             </div>
         </div>
-        <button class="banner-arrow banner-prev" onclick="changeBanner(-1)">❮</button>
-        <button class="banner-arrow banner-next" onclick="changeBanner(1)">❯</button>
+        <button class="banner-arrow banner-prev" data-action="changeBanner" data-param="-1">❮</button>
+        <button class="banner-arrow banner-next" data-action="changeBanner" data-param="1">❯</button>
         <div class="banner-dots" id="bannerDots">
-            <span class="dot active" onclick="goToBanner(0)"></span>
-            <span class="dot" onclick="goToBanner(1)"></span>
-            <span class="dot" onclick="goToBanner(2)"></span>
+            <span class="dot active" data-action="goToBanner" data-param="0"></span>
+            <span class="dot" data-action="goToBanner" data-param="1"></span>
+            <span class="dot" data-action="goToBanner" data-param="2"></span>
         </div>
     </section>
 
@@ -757,14 +759,14 @@
                         <option value="1000+">¥1000以上</option>
                     </select>
                 </div>
-                <button class="search-btn" onclick="doSearch()">搜索</button>
+                <button class="search-btn" data-action="doSearch">搜索</button>
             </div>
             <div class="search-tags">
-                <span class="search-tag" onclick="quickSearch('北海民宿')">北海民宿</span>
-                <span class="search-tag" onclick="quickSearch('涠洲岛')">涠洲岛</span>
-                <span class="search-tag" onclick="quickSearch('阳朔')">阳朔</span>
-                <span class="search-tag" onclick="quickSearch('养老')">候鸟养老</span>
-                <span class="search-tag" onclick="quickSearch('德天')">德天瀑布</span>
+                <span class="search-tag" data-action="quickSearch" data-param="北海民宿">北海民宿</span>
+                <span class="search-tag" data-action="quickSearch" data-param="涠洲岛">涠洲岛</span>
+                <span class="search-tag" data-action="quickSearch" data-param="阳朔">阳朔</span>
+                <span class="search-tag" data-action="quickSearch" data-param="养老">候鸟养老</span>
+                <span class="search-tag" data-action="quickSearch" data-param="德天">德天瀑布</span>
             </div>
         </div>
     </section>
@@ -884,7 +886,7 @@
                     <div class="contact-icon">💬</div>
                     <h3>微信咨询</h3>
                     <p>添加微信，一对一服务</p>
-                    <button class="btn-primary" onclick="showWechat()">扫码添加</button>
+                    <button class="btn-primary" data-action="showWechat">扫码添加</button>
                 </div>
                 <div class="contact-card">
                     <div class="contact-icon">📱</div>
@@ -896,14 +898,14 @@
                     <div class="contact-icon">📝</div>
                     <h3>在线留言</h3>
                     <p>填写信息，快速响应</p>
-                    <button class="btn-primary" onclick="showContactForm()">立即留言</button>
+                    <button class="btn-primary" data-action="showContactForm">立即留言</button>
                 </div>
             </div>
             
             <!-- 在线留言表单弹窗 -->
             <div class="contact-form-modal" id="contactFormModal">
                 <div class="contact-form-content">
-                    <span class="modal-close" onclick="closeContactForm()">&times;</span>
+                    <span class="modal-close" data-action="closeContactForm">&times;</span>
                     <h3>📝 留言咨询</h3>
                     <p class="form-subtitle">提交后我们将第一时间联系您</p>
                     <form id="contactForm" onsubmit="submitContactForm(event)">
@@ -944,7 +946,7 @@
                 <p>专业团队 24 小时在线，随时为您服务</p>
                 <div class="cta-buttons">
                     <a href="tel:17200861361" class="cta-btn cta-phone">📞 电话咨询</a>
-                    <a href="javascript:void(0)" onclick="copyWechat()" class="cta-btn cta-wechat">💬 微信咨询</a>
+                    <a href="javascript:void(0)" data-action="copyWechat" class="cta-btn cta-wechat">💬 微信咨询</a>
                 </div>
                 <p class="cta-note">⭐ 免费咨询 · 0 手续费 · 透明定价</p>
             </div>
@@ -995,11 +997,11 @@
     </div>
     <div class="modal" id="wechatModal">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('wechatModal')">&times;</span>
+            <span class="modal-close" data-action="closeModal" data-param="wechatModal">&times;</span>
             <h3>💬 添加微信详询</h3>
             <div class="qr-placeholder">
                 <img src="/images/wechat-qr.jpg" alt="微信二维码" loading="lazy">
-                <button class="qr-box" onclick="copyWechat()">
+                <button class="qr-box" data-action="copyWechat">
                     <span>➕</span>
                     <p>一键复制微信号</p>
                 </button>
@@ -1148,11 +1150,11 @@
                 mobileHTML += `<li class="mobile-group-title">${group.icon} ${group.name}</li>`;
                 group.items.forEach(itemId => {
                     const s = SECTIONS.find(s => s.id === itemId);
-                    mobileHTML += `<li><a href="#${s.id}" onclick="closeMobileMenu()">${s.icon} ${s.title}</a></li>`;
+                    mobileHTML += `<li><a href="#${s.id}" data-action="closeMobileMenu">${s.icon} ${s.title}</a></li>`;
                 });
             });
             
-            mobileHTML += `<li><a href="javascript:void(0); showContactForm()" onclick="closeMobileMenu()">📞 联系我们</a></li>`;
+            mobileHTML += `<li><a href="javascript:void(0); showContactForm()" data-action="closeMobileMenu">📞 联系我们</a></li>`;
             
             navContainer.innerHTML = navHTML;
             mobileNav.innerHTML = mobileHTML;
@@ -1516,7 +1518,7 @@
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
         </a>
-        <a href="javascript:void(0)" onclick="showWechat()" class="floating-btn floating-wechat" aria-label="微信咨询">
+        <a href="javascript:void(0)" data-action="showWechat" class="floating-btn floating-wechat" aria-label="微信咨询">
             <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.045c.134 0 .24-.11.24-.244 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.269-.03-.406-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
             </svg>
@@ -1535,7 +1537,7 @@
     <!-- 微信二维码弹窗 -->
     <div id="wechatQRModal" class="modal" style="display: none;">
         <div class="modal-content wechat-qr-modal">
-            <span class="modal-close" onclick="closeWechatQR()">&times;</span>
+            <span class="modal-close" data-action="closeWechatQR">&times;</span>
             <h3>📱 扫码添加微信</h3>
             <p class="wechat-id">微信号：<strong>ai_fang365</strong></p>
             <div class="wechat-qr-placeholder">
@@ -1546,7 +1548,7 @@
                 </div>
             </div>
             <div class="wechat-actions">
-                <button onclick="copyWechat()" class="btn-copy-wechat">📋 复制微信号</button>
+                <button data-action="copyWechat" class="btn-copy-wechat">📋 复制微信号</button>
             </div>
             <p class="wechat-tip">工作时间：8:00-22:00 随时响应</p>
         </div>
@@ -1626,13 +1628,103 @@ function closeTagModal() {
 </script>
 
 <!-- 标签信息弹窗 -->
-<div id="tagModal" class="tag-modal" onclick="closeTagModal()">
+<div id="tagModal" class="tag-modal" data-action="closeTagModal">
     <div class="tag-modal-content" onclick="event.stopPropagation()">
         <div id="tagModalIcon" class="tag-modal-icon">🏷️</div>
         <p id="tagModalText" class="tag-modal-text"></p>
-        <button class="tag-modal-close" onclick="closeTagModal()">知道了</button>
+        <button class="tag-modal-close" data-action="closeTagModal">知道了</button>
     </div>
 </div>
 
+    <!-- 事件委托 - 替代内联 onclick -->
+    <script>
+    (function() {
+        // 统一的事件委托处理器
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('[data-action]');
+            if (!target) return;
+            
+            const action = target.getAttribute('data-action');
+            const param = target.getAttribute('data-param');
+            
+            switch(action) {
+                case 'toggleMobileMenu':
+                    toggleMobileMenu();
+                    break;
+                case 'closeMobileMenu':
+                    closeMobileMenu();
+                    break;
+                case 'changeBanner':
+                    changeBanner(parseInt(param));
+                    break;
+                case 'goToBanner':
+                    goToBanner(parseInt(param));
+                    break;
+                case 'doSearch':
+                    doSearch();
+                    break;
+                case 'quickSearch':
+                    quickSearch(param);
+                    break;
+                case 'showWechat':
+                    showWechat();
+                    break;
+                case 'showContactForm':
+                    showContactForm();
+                    break;
+                case 'scrollToSection':
+                    scrollToSection(param);
+                    break;
+                case 'showPropertyDetail':
+                    showPropertyDetail(parseInt(param));
+                    break;
+                case 'closePropertyModal':
+                    closePropertyModal();
+                    break;
+                case 'openTencentMap':
+                    openTencentMap();
+                    break;
+                case 'backToTop':
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                    break;
+                case 'closeContactForm':
+                    closeContactForm();
+                    break;
+                case 'closeModal':
+                    closeModal(param);
+                    break;
+                case 'closeWechatQR':
+                    closeWechatQR();
+                    break;
+                case 'closeTagModal':
+                    closeTagModal();
+                    break;
+                case 'copyWechat':
+                    copyWechat();
+                    break;
+                case 'showTagInfo':
+                    showTagInfo(param);
+                    break;
+                case 'loadPage':
+                    const [sectionId, pageNum] = param.split(',');
+                    loadPage(sectionId, parseInt(pageNum));
+                    break;
+            }
+        });
+        
+        // 移动端菜单状态管理
+        let menuOpen = false;
+        window.toggleMobileMenu = function() {
+            menuOpen = !menuOpen;
+            document.getElementById('mobileMenu').classList.toggle('active', menuOpen);
+            document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', menuOpen);
+        };
+        window.closeMobileMenu = function() {
+            menuOpen = false;
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', 'false');
+        };
+    })();
+    </script>
 </body>
 </html>
