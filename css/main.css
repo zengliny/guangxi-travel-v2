@@ -1,0 +1,271 @@
+/* ========================================
+   Main Entry - 主入口文件
+   广西旅游网站 v2.0
+   模块化 CSS 架构
+   ======================================== */
+
+/* 引入各模块 - 按依赖顺序 */
+@import url('./01-variables.css');
+@import url('./02-reset.css');
+@import url('./03-header.css');
+@import url('./04-cards.css');
+@import url('./05-modal.css');
+@import url('./06-buttons.css');
+
+/* ========================================
+   Additional Components - 其他组件
+   ======================================== */
+
+/* Banner 轮播 */
+.banner {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.banner-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+
+.banner-slide.active {
+    opacity: 1;
+}
+
+.banner-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-content {
+    position: absolute;
+    bottom: var(--space-xl);
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* 搜索栏 */
+.search-bar {
+    background: var(--light);
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-xl);
+}
+
+.search-form {
+    display: flex;
+    gap: var(--space-sm);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    border: 2px solid var(--light-secondary);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* 分类筛选 */
+.filter-tabs {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+}
+
+.filter-tab {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-full);
+    background: var(--light);
+    color: var(--dark);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+}
+
+.filter-tab:hover,
+.filter-tab.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* 分页 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl) 0;
+}
+
+.pagination button {
+    min-width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--light);
+    color: var(--dark);
+    transition: all var(--transition-fast);
+}
+
+.pagination button:hover,
+.pagination button.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Footer */
+.footer {
+    background: var(--dark);
+    color: var(--white);
+    padding: var(--space-2xl) 0;
+    margin-top: var(--space-2xl);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-xl);
+}
+
+.footer h3 {
+    color: var(--primary-light);
+    margin-bottom: var(--space-md);
+}
+
+.footer p,
+.footer a {
+    color: var(--gray);
+    margin-bottom: var(--space-sm);
+}
+
+.footer a:hover {
+    color: var(--primary);
+}
+
+/* 联系表单 */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 2px solid var(--light-secondary);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* 微信二维码弹窗 */
+.wechat-qr-modal .modal-content {
+    text-align: center;
+}
+
+.wechat-qr-modal img {
+    max-width: 250px;
+    margin: 0 auto var(--space-md);
+}
+
+/* 加载状态 */
+.loading {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--gray);
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--light);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: var(--space-sm);
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--gray);
+}
+
+.empty-state svg {
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--space-md);
+    opacity: 0.5;
+}
+
+/* 响应式工具类 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--space-sm);
+    }
+    
+    .banner {
+        height: 250px;
+    }
+    
+    .search-form {
+        flex-direction: column;
+    }
+    
+    .filter-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: var(--space-sm);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
