@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e67e22"/>
+      <stop offset="100%" style="stop-color:#d35400"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="280" font-family="Noto Sans SC, sans-serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle">广西旅游达人</text>
+  <text x="600" y="360" font-family="Noto Sans SC, sans-serif" font-size="36" fill="white" text-anchor="middle">涠洲岛 · 德天瀑布 · 阳朔 · 北海银滩</text>
+  <text x="600" y="420" font-family="Noto Sans SC, sans-serif" font-size="28" fill="rgba(255,255,255,0.8)" text-anchor="middle">景点攻略 | 民宿推荐 | 租房信息 | 候鸟养老</text>
+  <text x="600" y="480" font-family="Noto Sans SC, sans-serif" font-size="24" fill="rgba(255,255,255,0.6)" text-anchor="middle">免费咨询：17200861361</text>
+</svg>
