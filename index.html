@@ -130,6 +130,100 @@
     /* 关键 CSS - 首屏渲染 */
     :root{--primary:#e67e22;--primary-dark:#d35400;--secondary:#f1c40f;--dark:#2c3e50;--light:#fef9e7}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',sans-serif;line-height:1.6}.container{max-width:1200px;margin:0 auto;padding:0 20px}.banner-section{height:500px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.banner-content{text-align:center;color:#fff;z-index:2;padding:20px}.banner-content h2{font-size:3rem;margin-bottom:15px}.banner-tag{display:inline-block;background:rgba(255,255,255,0.2);padding:8px 20px;border-radius:30px;margin-bottom:20px;font-size:1.1rem}.banner-btn{display:inline-block;background:var(--secondary);color:#fff;padding:14px 35px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:20px;transition:all .3s}.header{background:#fff;box-shadow:0 2px 20px rgba(0,0,0,0.1);position:fixed;top:0;z-index:1000}.nav-links{display:flex;gap:30px;list-style:none}.nav-links a{text-decoration:none;color:var(--dark);font-weight:500}@media(max-width:768px){.banner-content h2{font-size:1.8rem}.banner-section{height:350px}}
     </style>
+    <!-- 百度统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d8e7ca091e6a0caa1bf2c3fcabe9b2c6";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    
+    <!-- Sentry 错误监控 (2026-04-01) -->
+    <script src="https://browser.sentry-cdn.com/7.128.0/bundle.min.js"></script>
+    <script>
+      // 生产环境 DSN（需要替换为实际的 Sentry DSN）
+      // 格式: https://your-public-key@sentry.io/project-id
+      // 示例: https://abc123def456@sentry.io/1234567
+      // 使用示例 DSN 占位符，实际使用时替换为真实 DSN
+      const SENTRY_DSN = "https://example@sentry.io/12345678";
+      
+      // 判断环境：GitHub Pages 部署的生产环境 vs 本地开发
+      const isProduction = window.location.hostname.includes('github.io');
+      const environment = isProduction ? 'production' : 'development';
+      
+      // 初始化 Sentry
+      Sentry.init({
+        dsn: SENTRY_DSN,
+        environment: environment,
+        // 生产环境才发送错误事件，开发环境只记录到控制台
+        sendDefaultPii: false,
+        // 采样率：生产环境 100%，开发环境 0%（避免开发环境产生无用数据）
+        tracesSampleRate: isProduction ? 1.0 : 0.0,
+        // 自动捕获未处理的 Promise  rejection
+        integrations: [
+          Sentry.browserTracingIntegration(),
+          Sentry.replayIntegration({
+            maskAllText: false,
+            blockAllMedia: false,
+          }),
+        ],
+        // 过滤敏感信息
+        beforeSend(event, hint) {
+          // 移除可能的敏感 URL 参数
+          if (event.request && event.request.url) {
+            const url = new URL(event.request.url);
+            url.search = ''; // 清除所有查询参数
+            event.request.url = url.toString();
+          }
+          return event;
+        }
+      });
+      
+      // 全局错误捕获 - JavaScript 运行时错误
+      window.addEventListener('error', function(event) {
+        // 忽略资源加载错误（如图片失败），只捕获 JS 错误
+        if (event.target && event.target.tagName) {
+          // 资源加载错误不上报 Sentry（可以通过 Sentry 配置单独处理）
+          return;
+        }
+        
+        Sentry.captureException(event.error, {
+          extra: {
+            message: event.message,
+            filename: event.filename,
+            lineno: event.lineno,
+            colno: event.colno,
+            type: 'window.onerror'
+          }
+        });
+      });
+      
+      // 全局错误捕获 - 未处理的 Promise 拒绝
+      window.addEventListener('unhandledrejection', function(event) {
+        Sentry.captureException(event.reason, {
+          extra: {
+            type: 'unhandledrejection',
+            promise: event.promise
+          }
+        });
+      });
+      
+      // 可选：重写 console.error 来捕获第三方库的 console.error 调用
+      const originalConsoleError = console.error;
+      console.error = function(...args) {
+        // 只上报包含明显错误的日志
+        if (args[0] && typeof args[0] === 'string' && args[0].toLowerCase().includes('error')) {
+          Sentry.captureMessage(args[0], 'error');
+        }
+        originalConsoleError.apply(console, args);
+      };
+      
+      console.log('[Sentry] 错误监控已初始化，environment:', environment);
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
