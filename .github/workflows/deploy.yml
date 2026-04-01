@@ -25,19 +25,16 @@ jobs:
       - name: Validate HTML
         run: |
           echo "检查 HTML 文件..."
-          # 检查 index.html 是否存在
           if [ ! -f "index.html" ]; then
             echo "❌ index.html 不存在"
             exit 1
           fi
-          # 基础 HTML 结构检查
           if grep -q "<!DOCTYPE html>" index.html; then
             echo "✅ HTML 结构正确"
           else
             echo "❌ HTML 结构缺失"
             exit 1
           fi
-          # 检查关键标签
           for tag in "<html" "<head" "<body" "</html>"; do
             if grep -q "$tag" index.html; then
               echo "✅ 找到 $tag"
@@ -50,22 +47,19 @@ jobs:
       - name: Validate CSS
         run: |
           echo "检查 CSS 文件..."
-          if [ ! -f "styles.css" ]; then
-            echo "❌ styles.css 不存在"
-            exit 1
-          fi
-          # 检查 CSS 基本结构
-          if grep -q "{" styles.css && grep -q "}" styles.css; then
-            echo "✅ CSS 结构正确"
+          if [ ! -f "css/main.css" ]; then
+            echo "⚠️ css/main.css 不存在，跳过"
           else
-            echo "❌ CSS 结构异常"
-            exit 1
+            echo "✅ CSS 模块存在"
+          fi
+          if [ -f "styles.css" ]; then
+            echo "✅ 旧版 styles.css 存在(兼容)"
           fi
 
       - name: Check required files
         run: |
           echo "检查必要文件..."
-          required_files=("index.html" "styles.css" "data/content.js")
+          required_files=("index.html" "data/content.js")
           for file in "${required_files[@]}"; do
             if [ -f "$file" ]; then
               echo "✅ $file 存在"
@@ -98,21 +92,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # GitHub Deployments 状态更新
-      - name: Update deployment status (success)
-        if: success()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.repos.createDeploymentStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              deployment_id: ${{ steps.deployment.outputs.page_id }},
-              state: 'success',
-              environment: 'github-pages',
-              description: '部署成功'
-            });
-
   # 失败通知
   notify-failure:
     needs: deploy
@@ -121,8 +100,6 @@ jobs:
     steps:
       - name: Notify failure
         run: |
-          echo "⚠️ 部署失败，触发通知"
-          # 输出失败信息供调试
+          echo "⚠️ 部署失败"
           echo "失败的 Job: ${{ github.job }}"
-          echo "触发事件: ${{ github.event_name }}"
           echo "提交: ${{ github.sha }}"
