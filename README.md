@@ -1,5 +1,8 @@
 # 广西旅游网站 - 内容更新指南
 
+[![Deploy](https://github.com/zengliny/guangxi-travel-v2/actions/workflows/deploy.yml/badge.svg)](https://github.com/zengliny/guangxi-travel-v2/actions/workflows/deploy.yml)
+[![Pages](https://img.shields.io/badge/Pages-Ready-green)](https://zengliny.github.io/guangxi-travel-v2/)
+
 ## 🚀 快速开始
 
 ### 方式一：直接修改数据文件
