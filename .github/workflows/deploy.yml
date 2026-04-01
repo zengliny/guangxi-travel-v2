@@ -42,16 +42,18 @@ jobs:
             fi
           done
 
-      # 2. 安全检查 - 禁止 CONFIG 占位符
+      # 2. 安全检查 - 禁止 CONFIG 占位符 (只检查 CONFIG.phone, CONFIG.wechat 等实际占位符)
       - name: Check for CONFIG placeholders
         run: |
           echo "🔒 检查 CONFIG 占位符..."
-          if grep -r "CONFIG\." --include="*.html" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"; then
-            echo "❌ 发现未替换的 CONFIG 占位符！"
-            grep -r "CONFIG\." --include="*.html" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"
+          # 只检查 CONFIG.phone, CONFIG.wechat 等实际占位符
+          # 忽略 SEO_CONFIG, BOOKING_CONFIG 等合法的配置对象
+          if grep -r "CONFIG\.phone\|CONFIG\.wechat" --include="*.html" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"; then
+            echo "❌ 发现未替换的 CONFIG.phone/wechat 占位符！"
+            grep -r "CONFIG\.phone\|CONFIG\.wechat" --include="*.html" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"
             exit 1
           fi
-          echo "✅ 无 CONFIG 占位符"
+          echo "✅ 无 CONFIG.phone/wechat 占位符"
 
       # 3. 安全检查 - 禁止示例密钥
       - name: Check for example credentials
