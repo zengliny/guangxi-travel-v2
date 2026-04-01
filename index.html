@@ -968,8 +968,8 @@
         }
 
         // 渲染卡片
-        // 分页配置
-        const ITEMS_PER_PAGE = 6;
+        // 分页配置 - 首屏性能优化：从6减少到4
+        const ITEMS_PER_PAGE = 4;
         const pageState = {};
         
         function renderCards(items, section, page = 1) {
