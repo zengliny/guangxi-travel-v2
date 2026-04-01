@@ -1405,6 +1405,53 @@
             document.getElementById('wechatModal').style.display = 'flex';
         }
         
+        // ==================== 分享功能 ====================
+        function toggleShareMenu() {
+            const menu = document.getElementById('shareMenu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // 分享到微信
+        function shareToWechat() {
+            // 微信分享需要使用微信SDK，提示用户使用微信内置功能
+            alert('请点击右上角「...」选择「发送给朋友」');
+            document.getElementById('shareMenu').style.display = 'none';
+        }
+        
+        // 分享到朋友圈
+        function shareToMoments() {
+            alert('请点击右上角「...」选择「分享到朋友圈」');
+            document.getElementById('shareMenu').style.display = 'none';
+        }
+        
+        // 分享到微博
+        function shareToWeibo() {
+            const title = '广西旅游 - 涠洲岛、德天瀑布、北海银滩全攻略';
+            const url = window.location.href;
+            const weiboUrl = `https://service.weibo.com/share/share.php?title=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+            window.open(weiboUrl, '_blank');
+            document.getElementById('shareMenu').style.display = 'none';
+        }
+        
+        // 复制链接
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('✅ 链接已复制！\n可以发送给朋友或粘贴到其他平台');
+            }).catch(() => {
+                prompt('复制以下链接：', window.location.href);
+            });
+            document.getElementById('shareMenu').style.display = 'none';
+        }
+        
+        // 点击外部关闭分享菜单
+        document.addEventListener('click', function(e) {
+            const shareBtn = document.getElementById('shareBtn');
+            const shareMenu = document.getElementById('shareMenu');
+            if (shareBtn && shareMenu && !shareBtn.contains(e.target) && !shareMenu.contains(e.target)) {
+                shareMenu.style.display = 'none';
+            }
+        });
+        
         // 复制微信号
         function copyWechat() {
             navigator.clipboard.writeText('ai_fang365').then(() => {
@@ -1526,6 +1573,29 @@
         <a href="javascript:void(0); showContactForm()" class="floating-btn floating-booking" aria-label="立即预约">
             <span>立即预约</span>
         </a>
+        <!-- 分享按钮 -->
+        <a href="javascript:void(0)" class="floating-btn floating-share" onclick="toggleShareMenu()" aria-label="分享网站" id="shareBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                <polyline points="16 6 12 2 8 6"/>
+                <line x1="12" y1="2" x2="12" y2="15"/>
+            </svg>
+        </a>
+        <!-- 分享菜单 -->
+        <div class="share-menu" id="shareMenu" style="display: none;">
+            <a href="javascript:void(0)" onclick="shareToWechat()" class="share-option">
+                <span>💬 微信好友</span>
+            </a>
+            <a href="javascript:void(0)" onclick="shareToMoments()" class="share-option">
+                <span>🌐 朋友圈</span>
+            </a>
+            <a href="javascript:void(0)" onclick="shareToWeibo()" class="share-option">
+                <span>🔶 微博</span>
+            </a>
+            <a href="javascript:void(0)" onclick="copyLink()" class="share-option">
+                <span>📋 复制链接</span>
+            </a>
+        </div>
         <!-- 回到顶部按钮 -->
         <a href="#" class="floating-btn floating-top" id="backToTop" aria-label="回到顶部" onclick="smoothScrollToTop(); return false;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

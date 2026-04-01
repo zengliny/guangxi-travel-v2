@@ -6772,3 +6772,86 @@ input, textarea, select {
         to { transform: translateY(0); }
     }
 }
+
+/* ==================== 分享按钮样式 ==================== */
+.floating-share {
+    background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(7, 193, 96, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.floating-share:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(7, 193, 96, 0.5);
+}
+
+.floating-share svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* 分享菜单 */
+.share-menu {
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    min-width: 140px;
+    z-index: 1001;
+    overflow: hidden;
+}
+
+.share-menu::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 16px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+}
+
+.share-option {
+    display: block;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.share-option:hover {
+    background: #f5f5f5;
+    color: #07c160;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .share-menu {
+        min-width: 120px;
+    }
+    
+    .share-option {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
