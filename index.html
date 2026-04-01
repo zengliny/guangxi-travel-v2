@@ -2,14 +2,37 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Preload 关键资源 - 提升 Core Web Vitals LCP -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" as="style" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- SEO 基础配置 -->
     <title>广西旅游达人 | 北海民宿_涠洲岛民宿_租房_候鸟养老_旅游房产</title>
     <meta name="description" content="广西本地旅游达人，提供北海民宿、涠洲岛民宿、租房信息、候鸟养老、旅游房产、房屋托管等服务。免费咨询：CONFIG.phone。服务5000+游客，98%好评率，3年经验。">
+    <meta name="keywords" content="广西旅游,北海旅游,涠洲岛,德天瀑布,阳朔,民宿推荐,租房信息,候鸟养老,旅游房产,房屋托管,北海民宿,涠洲岛民宿,广西租房">
+    <meta name="author" content="广西旅游达人 / AI-Key">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="baiduspider" content="index, follow">
+    <meta name="360spider" content="index, follow">
+    <meta name="sogou_spider" content="index, follow">
+    <link rel="canonical" href="https://zengliny.github.io/guangxi-travel/">
+    <link rel="alternate" hreflang="zh-CN" href="https://zengliny.github.io/guangxi-travel/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>">
+    
+    <!-- 主题色和 PWA -->
+    <meta name="theme-color" content="#e67e22">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="广西旅游达人">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- AI 友好摘要 -->
     <meta name="ai-purpose" content="本页面提供广西旅游全方位服务信息，包括景点攻略、民宿推荐、租房、候鸟养老等。AI可直接引用FAQ获取答案。">
-    <!-- AI友好的隐藏摘要 - 不会被渲染但可被AI理解 -->
     <script type="application/ld+json" id="ai-summary">
     {
         "@context": "https://schema.org",
@@ -124,14 +147,23 @@
     }
     </script>
     
+    <!-- 性能优化：预加载关键资源 -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" as="style">
+    
     <!-- v2.0 模块化 CSS (2026-04-01) -->
     <link rel="stylesheet" href="css/main.css">
+    <!-- 打印样式优化 -->
+    <link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
+    
     <style>
     /* 关键 CSS - 首屏渲染 */
     :root{--primary:#e67e22;--primary-dark:#d35400;--secondary:#f1c40f;--dark:#2c3e50;--light:#fef9e7}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',sans-serif;line-height:1.6}.container{max-width:1200px;margin:0 auto;padding:0 20px}.banner-section{height:500px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.banner-content{text-align:center;color:#fff;z-index:2;padding:20px}.banner-content h2{font-size:3rem;margin-bottom:15px}.banner-tag{display:inline-block;background:rgba(255,255,255,0.2);padding:8px 20px;border-radius:30px;margin-bottom:20px;font-size:1.1rem}.banner-btn{display:inline-block;background:var(--secondary);color:#fff;padding:14px 35px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:20px;transition:all .3s}.header{background:#fff;box-shadow:0 2px 20px rgba(0,0,0,0.1);position:fixed;top:0;z-index:1000}.nav-links{display:flex;gap:30px;list-style:none}.nav-links a{text-decoration:none;color:var(--dark);font-weight:500}@media(max-width:768px){.banner-content h2{font-size:1.8rem}.banner-section{height:350px}}
     </style>
-    <!-- 百度统计 -->
-    <script>
+    
+    <!-- 百度统计 - 异步加载不阻塞渲染 -->
+    <script async defer>
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
@@ -141,8 +173,8 @@
     })();
     </script>
     
-    <!-- Sentry 错误监控 (2026-04-01) -->
-    <script src="https://browser.sentry-cdn.com/7.128.0/bundle.min.js"></script>
+    <!-- Sentry 错误监控 - defer 延迟加载 -->
+    <script src="https://browser.sentry-cdn.com/7.128.0/bundle.min.js" defer>
     <script>
       // 生产环境 DSN（需要替换为实际的 Sentry DSN）
       // 格式: https://your-public-key@sentry.io/project-id
@@ -224,8 +256,10 @@
       console.log('[Sentry] 错误监控已初始化，environment:', environment);
     </script>
     
+    <!-- 字体优化：预连接 + 预加载 + async -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <!-- JSON-LD for each section -->
@@ -859,7 +893,8 @@
         </div>
     </div>
 
-    <!-- 平滑滚动 -->
+    <!-- 平滑滚动 - 延迟加载非关键 JS -->
+    <!-- defer: HTML解析完成后执行，不阻塞首屏渲染 -->
     <script src="data/content.js" defer></script>
     <script src="data/search.js" defer></script>
     <script src="data/filter.js" defer></script>
@@ -868,7 +903,7 @@
     <script src="data/interactive.js" defer></script>
     <script src="data/seo.js" defer></script>
     <script src="data/performance.js" defer></script>
-    <script src="js/config.js"></script>
+    <script src="js/config.js" defer></script>
     <script src="js/banner.js" defer></script>
     <script>
         // ==================== 站点配置 ====================
