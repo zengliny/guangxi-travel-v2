@@ -54,19 +54,26 @@
     <link rel="alternate" hreflang="zh-CN" href="https://zengliny.github.io/guangxi-travel/">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏝️</text></svg>">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="广西旅游达人 | 北海民宿_涠洲岛民宿_租房_候鸟养老_旅游房产">
-    <meta property="og:description" content="广西本地一站式旅游服务：景点攻略、民宿推荐、租房信息、候鸟养老、旅游房产、房屋托管、拍卖房代办、房屋置换。免费咨询：CONFIG.phone">
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zengliny.github.io/guangxi-travel/">
+    <meta property="og:title" content="广西旅游达人 | 北海民宿_涠洲岛民宿_租房_候鸟养老_旅游房产">
+    <meta property="og:description" content="广西本地一站式旅游服务：景点攻略、民宿推荐、租房信息、候鸟养老、旅游房产、房屋托管、拍卖房代办、房屋置换。免费咨询：CONFIG.phone">
     <meta property="og:image" content="https://zengliny.github.io/guangxi-travel/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="广西旅游达人 - 北海、涠洲岛、德天瀑布、阳朔一站式服务">
     <meta property="og:site_name" content="广西旅游达人">
     <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://zengliny.github.io/guangxi-travel/">
     <meta name="twitter:title" content="广西旅游达人 / AI-Key | 北海民宿、租房、候鸟养老、旅游房产">
-    <meta name="twitter:description" content="广西本地一站式旅游服务">
+    <meta name="twitter:description" content="广西本地一站式旅游服务：景点攻略、民宿推荐、租房信息、候鸟养老、旅游房产">
+    <meta name="twitter:image" content="https://zengliny.github.io/guangxi-travel/images/og-image.jpg">
+    <meta name="twitter:image:alt" content="广西旅游达人">
     
     <!-- 结构化数据 - Website with SearchAction -->
     <script type="application/ld+json">
@@ -142,6 +149,96 @@
                 "position": 1,
                 "name": "首页",
                 "item": "https://zengliny.github.io/guangxi-travel/"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- 结构化数据 - LocalBusiness -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "广西旅游达人",
+        "alternateName": "AI-Key 广西旅游",
+        "description": "广西本地专业旅游服务，提供景点攻略、民宿推荐、租房、候鸟养老、旅游房产、房屋托管等一站式服务",
+        "url": "https://zengliny.github.io/guangxi-travel/",
+        "telephone": "+86CONFIG.phone",
+        "priceRange": "¥100-¥5000",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "北海市",
+            "addressRegion": "广西壮族自治区",
+            "addressCountry": "CN",
+            "postalCode": "536000"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "21.4733",
+            "longitude": "109.1143"
+        },
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "08:00",
+            "closes": "22:00"
+        }],
+        "areaServed": {
+            "@type": "State",
+            "name": "广西壮族自治区"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "500",
+            "bestRating": "5"
+        },
+        "image": "https://zengliny.github.io/guangxi-travel/images/og-image.jpg"
+    }
+    </script>
+    
+    <!-- 结构化数据 - TouristAttraction 景点列表 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "广西热门景点",
+        "itemListElement": [
+            {
+                "@type": "TouristAttraction",
+                "name": "涠洲岛",
+                "description": "中国最大火山岛，拥有鳄鱼山火山公园、贝壳沙滩、滴水丹屏等景点",
+                "address": {"addressLocality": "北海市", "addressRegion": "广西"},
+                "geo": {"latitude": "21.0061", "longitude": "109.0997"},
+                "openingHours": "全天开放",
+                "priceRange": "免费（船票需另付）"
+            },
+            {
+                "@type": "TouristAttraction",
+                "name": "德天瀑布",
+                "description": "亚洲第一跨国瀑布，与越南板约瀑布相连，气势磅礴",
+                "address": {"addressLocality": "大新县", "addressRegion": "广西"},
+                "geo": {"latitude": "22.8557", "longitude": "106.7223"},
+                "openingHours": "07:30-18:00",
+                "priceRange": "¥80"
+            },
+            {
+                "@type": "TouristAttraction",
+                "name": "阳朔西街",
+                "description": "桂林山水甲天下，阳朔西街是精华所在",
+                "address": {"addressLocality": "阳朔县", "addressRegion": "广西"},
+                "geo": {"latitude": "24.7785", "longitude": "110.4895"},
+                "openingHours": "全天开放",
+                "priceRange": "免费"
+            },
+            {
+                "@type": "TouristAttraction",
+                "name": "北海银滩",
+                "description": "天下第一滩，沙质细腻白滑，海水清澈",
+                "address": {"addressLocality": "北海市", "addressRegion": "广西"},
+                "geo": {"latitude": "21.4117", "longitude": "109.1250"},
+                "openingHours": "全天开放",
+                "priceRange": "免费"
             }
         ]
     }

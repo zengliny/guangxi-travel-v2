@@ -1,4 +1,40 @@
+# Robots.txt for 广西旅游达人
+# https://zengliny.github.io/guangxi-travel/
+
 User-agent: *
 Allow: /
 
+# 禁止爬取的路径
+Disallow: /js/
+Disallow: /data/
+Disallow: /css/
+Disallow: /scripts/
+
+# Sitemap
 Sitemap: https://zengliny.github.io/guangxi-travel/sitemap.xml
+
+# 爬虫访问频率限制
+Crawl-delay: 1
+
+# 特殊爬虫指引
+User-agent: Googlebot
+Allow: /
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.svg
+Allow: /*.webp
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: Facebookexternalhit
+Allow: /
