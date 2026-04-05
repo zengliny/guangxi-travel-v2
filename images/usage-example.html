@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片优化使用示例</title>
+</head>
+<body>
+    <h1>优化后的图片使用示例</h1>
+    
+    <!-- 示例1: WebP优先，JPG回退 -->
+    <picture>
+        <source srcset="/images/webp/example.webp" type="image/webp">
+        <source srcset="/images/optimized/example.jpg" type="image/jpeg">
+        <img src="/images/optimized/example.jpg" alt="示例图片" loading="lazy" width="800" height="600">
+    </picture>
+    
+    <!-- 示例2: 响应式图片 -->
+    <img src="/images/responsive/example-800.webp"
+         srcset="/images/responsive/example-400.webp 400w,
+                 /images/responsive/example-800.webp 800w,
+                 /images/responsive/example-1200.webp 1200w"
+         sizes="(max-width: 768px) 100vw, 50vw"
+         alt="响应式图片示例"
+         loading="lazy"
+         width="800"
+         height="600">
+</body>
+</html>

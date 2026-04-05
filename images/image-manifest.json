@@ -1,0 +1,14 @@
+{
+  "optimized_at": "2026-04-05T19:37:10+08:00",
+  "total_images": 12,
+  "formats": {
+    "original": 2,
+    "webp": 2,
+    "responsive": 13,
+    "optimized": 3
+  },
+  "sizes": {
+    "responsive": [400, 800, 1200],
+    "quality": 85
+  }
+}

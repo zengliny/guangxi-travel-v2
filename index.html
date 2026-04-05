@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <!-- 跳过链接 - 提高可访问性 -->
     <style>
         .skip-link {
@@ -114,10 +115,42 @@
     </script>
     
     <!-- 结构化数据 - Organization/TravelAgency -->
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 预连接第三方域 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="/css/main.css" as="style">
+    <link rel="preload" href="/images/hero.webp" as="image" type="image/webp">
+    
+    <!-- 字体加载优化 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Noto Sans SC';
+            font-display: swap;
+        }
+    </style>
+    
+    <!-- 基础SEO -->
+    <title>广西旅游达人 - 一站式旅游服务</title>
+    <meta name="description" content="广西本地旅游达人，提供北海民宿、涠洲岛民宿、租房信息、候鸟养老、旅游房产、房屋托管等服务。免费咨询：17200861361。服务5000+游客，98%好评率，3年经验。">
+    
+    <!-- AI搜索友好元数据 -->
+    <meta name="ai:readable" content="true">
+    <meta name="ai:topics" content="广西旅游,桂林山水,阳朔骑行,龙脊梯田,涠洲岛,候鸟养老">
+    <meta name="ai:summary" content="广西旅游一站式服务平台，提供景点介绍、旅游攻略、线路推荐、民宿预订等服务">
+    
+    <!-- 结构化数据 -->
+>>>>>>> 3a450e1 (优化版广西旅游网站)
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "TravelAgency",
+<<<<<<< HEAD
         "name": "广西旅游达人 / AI-Key",
         "description": "广西本地旅游服务，提供景点攻略、民宿推荐、租房、候鸟养老、旅游房产等服务",
         "url": "https://zengliny.github.io/guangxi-travel-v2/",
@@ -196,10 +229,22 @@
             "opens": "08:00",
             "closes": "22:00"
         }],
+=======
+        "name": "广西旅游攻略",
+        "url": "https://v2.ai-key.top",
+        "description": "专业广西旅游指南，包含桂林、阳朔、龙脊梯田等景点攻略",
+        "telephone": "+86-172-0086-1361",
+        "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "广西",
+            "addressCountry": "CN"
+        },
+>>>>>>> 3a450e1 (优化版广西旅游网站)
         "areaServed": {
             "@type": "State",
             "name": "广西壮族自治区"
         },
+<<<<<<< HEAD
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
@@ -1817,6 +1862,125 @@ function closeTagModal() {
             document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', 'false');
         };
     })();
+=======
+        "sameAs": [
+            "https://github.com/zengliny/guangxi-travel-v2"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- 关键CSS内联 -->
+    <style>
+        /* 首屏关键样式 */
+        .critical-css { 
+            display: block; 
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 骨架屏样式 */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+    
+    <!-- 图片使用优化示例 -->
+    <div class="hero-image">
+        <img src="/images/hero.webp" 
+             srcset="/images/hero-400.webp 400w,
+                     /images/hero-800.webp 800w,
+                     /images/hero-1200.webp 1200w"
+             sizes="(max-width: 768px) 100vw, 50vw"
+             alt="广西旅游美景 - 桂林山水甲天下"
+             loading="lazy"
+             width="1200"
+             height="630"
+             class="skeleton">
+    </div>
+    
+    <!-- 非关键JS延迟加载 -->
+    <script>
+        // 延迟加载非关键JS
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const script = document.createElement('script');
+                        script.src = entry.target.dataset.src;
+                        script.async = true;
+                        document.body.appendChild(script);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '50px' // 提前50px开始加载
+            });
+            
+            // 观察需要延迟加载的元素
+            document.querySelectorAll('[data-lazy-script]').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // 图片懒加载回退
+        if ('loading' in HTMLImageElement.prototype) {
+            // 浏览器支持原生懒加载
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        } else {
+            // 回退方案
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('skeleton');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => imageObserver.observe(img));
+        }
+        
+        // 性能监控
+        window.addEventListener('load', () => {
+            const timing = performance.getEntriesByType('navigation')[0];
+            console.log('页面加载性能:', {
+                TTFB: timing.responseStart - timing.requestStart,
+                DOMContentLoaded: timing.domContentLoadedEventEnd - timing.fetchStart,
+                Load: timing.loadEventEnd - timing.fetchStart
+            });
+        });
+    </script>
+    
+    <!-- 延迟加载的脚本 -->
+    <div data-lazy-script data-src="/js/analytics.js"></div>
+    <div data-lazy-script data-src="/js/chat-widget.js"></div>
+    
+    <!-- Service Worker 注册 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker 注册成功:', registration.scope);
+                }).catch(error => {
+                    console.log('ServiceWorker 注册失败:', error);
+                });
+            });
+        }
+>>>>>>> 3a450e1 (优化版广西旅游网站)
     </script>
 </body>
 </html>

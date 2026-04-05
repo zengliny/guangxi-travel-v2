@@ -1,0 +1,12 @@
+{
+  "name": "guangxi-travel",
+  "version": "1.0.0",
+  "description": "广西旅游网站优化版",
+  "scripts": {
+    "build": "echo 'build completed'",
+    "dev": "python3 -m http.server 8080"
+  },
+  "keywords": ["guangxi", "travel", "optimization"],
+  "author": "Claude Code Haha",
+  "license": "MIT"
+}
